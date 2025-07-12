@@ -3,17 +3,36 @@ import { getAaveRates } from './aave';
 
 export async function getAllYieldData() {
   try {
+    console.log('Fetching yield data...');
+
     const [compoundData, aaveData] = await Promise.all([
-      getCompoundRates(),
-      getAaveRates(),
+      getCompoundRates().catch((err) => {
+        console.error('Compound API error:', err);
+        return [];
+      }),
+      getAaveRates().catch((err) => {
+        console.error('Aave API error:', err);
+        return [];
+      }),
     ]);
 
-    const allData = [...compoundData, ...aaveData];
+    console.log('Compound data:', compoundData);
+    console.log('Aave data:', aaveData);
 
-    // Sort by APY (highest first)
-    return allData.sort((a, b) => parseFloat(b.apy) - parseFloat(a.apy));
+    const allData = [...compoundData, ...aaveData];
+    console.log('All data before sorting:', allData);
+
+    // Sort by APY (highest first) - add safety check
+    const sortedData = allData.sort((a, b) => {
+      const apyA = parseFloat(a.apy.replace('%', ''));
+      const apyB = parseFloat(b.apy.replace('%', ''));
+      return apyB - apyA;
+    });
+
+    console.log('Sorted data:', sortedData);
+    return sortedData;
   } catch (error) {
-    console.error('Error fetching all yield data:', error);
+    console.error('Error in getAllYieldData:', error);
     return [];
   }
 }
