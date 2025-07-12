@@ -12,16 +12,36 @@ interface StatsCardsProps {
 }
 
 export default function StatsCards({ data }: StatsCardsProps) {
+  // Safety checks
+  if (!data || data.length === 0) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        {[...Array(4)].map((_, i) => (
+          <Card key={i}>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Loading...</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">-</div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  }
+
   const totalProtocols = new Set(data.map((item) => item.protocol)).size;
   const highestAPY = data.length > 0 ? data[0].apy : '0%';
   const totalOpportunities = data.length;
 
-  // Calculate average APY
+  // Safe APY calculation
   const avgAPY =
     data.length > 0
       ? (
-          data.reduce((sum, item) => sum + parseFloat(item.apy), 0) /
-          data.length
+          data.reduce((sum, item) => {
+            const apy = parseFloat(item.apy.replace('%', '')) || 0;
+            return sum + apy;
+          }, 0) / data.length
         ).toFixed(2) + '%'
       : '0%';
 
