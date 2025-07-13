@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface StatsCardsProps {
   data: Array<{
@@ -12,17 +12,19 @@ interface StatsCardsProps {
 }
 
 export default function StatsCards({ data }: StatsCardsProps) {
-  // Safety checks
   if (!data || data.length === 0) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[...Array(4)].map((_, i) => (
-          <Card key={i}>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Loading...</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">-</div>
+          <Card
+            key={i}
+            className="border-0 shadow-lg bg-white/60 backdrop-blur-sm"
+          >
+            <CardContent className="p-6">
+              <div className="animate-pulse">
+                <div className="h-4 bg-slate-200 rounded w-20 mb-2"></div>
+                <div className="h-8 bg-slate-200 rounded w-16"></div>
+              </div>
             </CardContent>
           </Card>
         ))}
@@ -34,7 +36,6 @@ export default function StatsCards({ data }: StatsCardsProps) {
   const highestAPY = data.length > 0 ? data[0].apy : '0%';
   const totalOpportunities = data.length;
 
-  // Safe APY calculation
   const avgAPY =
     data.length > 0
       ? (
@@ -42,48 +43,58 @@ export default function StatsCards({ data }: StatsCardsProps) {
             const apy = parseFloat(item.apy.replace('%', '')) || 0;
             return sum + apy;
           }, 0) / data.length
-        ).toFixed(2) + '%'
+        ).toFixed(1) + '%'
       : '0%';
 
+  const stats = [
+    {
+      label: 'Protocols',
+      value: totalProtocols.toString(),
+      icon: '🏛️',
+      color: 'text-blue-600',
+    },
+    {
+      label: 'Best APY',
+      value: highestAPY,
+      icon: '📈',
+      color: 'text-green-600',
+    },
+    {
+      label: 'Avg APY',
+      value: avgAPY,
+      icon: '📊',
+      color: 'text-purple-600',
+    },
+    {
+      label: 'Opportunities',
+      value: totalOpportunities.toString(),
+      icon: '💎',
+      color: 'text-orange-600',
+    },
+  ];
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Total Protocols</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{totalProtocols}</div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Highest APY</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-green-600">{highestAPY}</div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Average APY</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{avgAPY}</div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">
-            Total Opportunities
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{totalOpportunities}</div>
-        </CardContent>
-      </Card>
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {stats.map((stat, index) => (
+        <Card
+          key={index}
+          className="border-0 shadow-lg bg-white/60 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+        >
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-slate-600 mb-1">
+                  {stat.label}
+                </p>
+                <p className={`text-2xl font-bold ${stat.color}`}>
+                  {stat.value}
+                </p>
+              </div>
+              <div className="text-2xl opacity-60">{stat.icon}</div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
