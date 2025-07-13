@@ -16,9 +16,9 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
   const getRiskLevel = (protocol: string, apy: string) => {
     const apyNum = parseFloat(apy.replace('%', ''));
 
-    if (apyNum > 8) return { level: 'High', color: 'destructive' };
-    if (apyNum > 5) return { level: 'Medium', color: 'warning' };
-    return { level: 'Low', color: 'secondary' };
+    if (apyNum > 8) return { level: 'High', variant: 'destructive' };
+    if (apyNum > 5) return { level: 'Medium', variant: 'secondary' };
+    return { level: 'Low', variant: 'outline' };
   };
 
   const getRiskFactors = (protocol: string) => {
@@ -48,7 +48,7 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                     <h4 className="font-semibold">{item.protocol}</h4>
                     <p className="text-sm text-gray-600">{item.asset}</p>
                   </div>
-                  <Badge variant={risk.color as any}>{risk.level}</Badge>
+                  <Badge variant={risk.variant as any}>{risk.level}</Badge>
                 </div>
 
                 <div className="mb-2">
