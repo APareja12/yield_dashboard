@@ -1,10 +1,15 @@
 import YieldTable from '@/components/dashboard/YieldTable';
+import Header from '@/components/layout/Header';
+import PortfolioTracker from '@/components/dashboard/PortfolioTracker';
 
 export default function Home() {
   return (
-    <main className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-8">DeFi Yield Dashboard</h1>
-      <YieldTable />
-    </main>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <main className="container mx-auto p-4">
+        <PortfolioTracker />
+        <YieldTable />
+      </main>
+    </div>
   );
 }
