@@ -1,15 +1,19 @@
 import YieldTable from '@/components/dashboard/YieldTable';
-import Header from '@/components/layout/Header';
-import PortfolioTracker from '@/components/dashboard/PortfolioTracker';
+import HeroSection from '@/components/sections/HeroSection';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <main className="container mx-auto p-4">
-        <PortfolioTracker />
-        <YieldTable />
-      </main>
+    <div className="min-h-screen">
+      <HeroSection />
+
+      <section
+        id="dashboard"
+        className="bg-gradient-to-br from-slate-50 to-white py-20"
+      >
+        <div className="container mx-auto px-4">
+          <YieldTable />
+        </div>
+      </section>
     </div>
   );
 }
