@@ -13,6 +13,9 @@ import {
 import { getAllYieldData } from '@/lib/api';
 import StatsCards from './StatsCards';
 import Filters from './Filters';
+import YieldChart from './YieldChart';
+import YieldCalculator from './YieldCalculator';
+import RiskAssessment from './RiskAssessment';
 
 export default function YieldTable() {
   const [data, setData] = useState<any[]>([]);
@@ -99,6 +102,12 @@ export default function YieldTable() {
   return (
     <div>
       <StatsCards data={filteredData} />
+
+      <YieldChart />
+
+      <YieldCalculator data={data} />
+
+      <RiskAssessment data={filteredData} />
 
       <Filters
         searchTerm={searchTerm}
