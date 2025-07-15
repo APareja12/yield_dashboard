@@ -133,7 +133,7 @@ export default function HeroSection() {
               <br />
               <span
                 style={{
-                  background:
+                  backgroundImage:
                     'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -204,7 +204,7 @@ export default function HeroSection() {
                   style={{
                     fontSize: '3rem',
                     marginBottom: '1rem',
-                    background: stat.gradient,
+                    backgroundImage: stat.gradient,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
