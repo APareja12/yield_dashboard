@@ -16,6 +16,7 @@ import Filters from './Filters';
 import YieldChart from './YieldChart';
 import YieldCalculator from './YieldCalculator';
 import RiskAssessment from './RiskAssessment';
+import OpportunitiesTable from './OpportunitiesTable';
 
 export default function YieldTable() {
   const [data, setData] = useState<any[]>([]);
@@ -132,60 +133,7 @@ export default function YieldTable() {
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-b border-slate-100 bg-slate-50/50">
-                  <TableHead className="font-semibold text-slate-700">
-                    Protocol
-                  </TableHead>
-                  <TableHead className="font-semibold text-slate-700">
-                    Asset
-                  </TableHead>
-                  <TableHead className="font-semibold text-slate-700">
-                    APY
-                  </TableHead>
-                  <TableHead className="font-semibold text-slate-700">
-                    TVL
-                  </TableHead>
-                  <TableHead className="font-semibold text-slate-700">
-                    Action
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredData.map((item, index) => (
-                  <TableRow
-                    key={`${item.protocol}-${item.asset}-${index}`}
-                    className="hover:bg-slate-50/50 transition-colors border-b border-slate-100 last:border-b-0"
-                  >
-                    <TableCell className="font-medium text-slate-900">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                          {item.protocol[0]}
-                        </div>
-                        <span>{item.protocol}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-slate-700 font-medium">
-                      {item.asset}
-                    </TableCell>
-                    <TableCell>
-                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold">
-                        {item.apy}
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-slate-600 font-medium">
-                      {item.tvl}
-                    </TableCell>
-                    <TableCell>
-                      <button className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium">
-                        Invest
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <OpportunitiesTable data={filteredData} />
           </div>
         </CardContent>
       </Card>
