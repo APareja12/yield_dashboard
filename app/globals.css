@@ -171,6 +171,9 @@ button {
   font-weight: 500;
   transition: all 0.2s ease;
   padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover {
@@ -185,6 +188,48 @@ button:hover {
 
 .btn-primary:hover {
   background: #334155;
+}
+
+/* Specific button styles for components */
+.bg-slate-900,
+button.bg-slate-900 {
+  background-color: #0f172a !important;
+  color: white !important;
+  border: none !important;
+}
+
+.hover\:bg-slate-800:hover,
+button.hover\:bg-slate-800:hover {
+  background-color: #1e293b !important;
+}
+
+.bg-blue-500,
+button.bg-blue-500 {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.hover\:bg-blue-600:hover,
+button.hover\:bg-blue-600:hover {
+  background-color: #2563eb !important;
+}
+
+/* General button text color fix */
+button {
+  color: inherit;
+}
+
+button.text-white {
+  color: white !important;
+}
+
+/* Ensure button text is visible */
+.px-4.py-2.bg-slate-900.text-white,
+.px-8.py-3.bg-slate-900.text-white {
+  background-color: #0f172a !important;
+  color: white !important;
+  border: none !important;
 }
 
 /* Grid layouts */
@@ -780,6 +825,55 @@ select:focus {
   .sm-flex-row {
     flex-direction: row;
   }
+}
+
+/* Badge and pill styling */
+.badge,
+.px-3.py-1.rounded-full {
+  background-color: #dcfce7 !important;
+  color: #166534 !important;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Outline badges */
+.border.rounded {
+  border: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #475569 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+}
+
+/* Form elements */
+.border.border-gray-300.rounded-md,
+select {
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  padding: 0.5rem !important;
+  background: white !important;
+  color: #1f2937 !important;
+}
+
+/* Background colors with transparency */
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* Card specific overrides */
+.card.border-0.shadow-xl {
+  border: none !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
 }
 
 /* Last child border */

@@ -1,7 +1,5 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
-
 interface StatsCardsProps {
   data: Array<{
     protocol: string;
@@ -14,19 +12,40 @@ interface StatsCardsProps {
 export default function StatsCards({ data }: StatsCardsProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg-grid-cols-4 gap-6 mb-12">
         {[...Array(4)].map((_, i) => (
-          <Card
+          <div
             key={i}
-            className="border-0 shadow-lg bg-white/60 backdrop-blur-sm"
+            className="relative group"
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '20px',
+              padding: '2rem',
+              animation: 'pulse 2s infinite',
+            }}
           >
-            <CardContent className="p-6">
-              <div className="animate-pulse">
-                <div className="h-4 bg-slate-200 rounded w-20 mb-2"></div>
-                <div className="h-8 bg-slate-200 rounded w-16"></div>
-              </div>
-            </CardContent>
-          </Card>
+            <div
+              style={{
+                height: '1rem',
+                background:
+                  'linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 50%, #e2e8f0 100%)',
+                borderRadius: '4px',
+                marginBottom: '0.75rem',
+                animation: 'shimmer 1.5s infinite',
+              }}
+            ></div>
+            <div
+              style={{
+                height: '2rem',
+                background:
+                  'linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 50%, #e2e8f0 100%)',
+                borderRadius: '4px',
+                width: '60%',
+              }}
+            ></div>
+          </div>
         ))}
       </div>
     );
@@ -51,50 +70,187 @@ export default function StatsCards({ data }: StatsCardsProps) {
       label: 'Protocols',
       value: totalProtocols.toString(),
       icon: '🏛️',
-      color: 'text-blue-600',
+      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      shadowColor: 'rgba(102, 126, 234, 0.3)',
     },
     {
       label: 'Best APY',
       value: highestAPY,
       icon: '📈',
-      color: 'text-green-600',
+      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      shadowColor: 'rgba(240, 147, 251, 0.3)',
     },
     {
       label: 'Avg APY',
       value: avgAPY,
       icon: '📊',
-      color: 'text-purple-600',
+      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      shadowColor: 'rgba(79, 172, 254, 0.3)',
     },
     {
       label: 'Opportunities',
       value: totalOpportunities.toString(),
       icon: '💎',
-      color: 'text-orange-600',
+      gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      shadowColor: 'rgba(67, 233, 123, 0.3)',
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 lg-grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg-grid-cols-4 gap-6 mb-12">
       {stats.map((stat, index) => (
-        <Card
+        <div
           key={index}
-          className="border-0 shadow-lg bg-white/60 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+          className="relative group cursor-pointer transform transition-all duration-500 hover:scale-105"
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '20px',
+            padding: '2rem',
+            boxShadow: `0 8px 32px ${stat.shadowColor}`,
+            animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = `0 12px 40px ${stat.shadowColor}, 0 0 0 1px rgba(255, 255, 255, 0.3)`;
+            e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = `0 8px 32px ${stat.shadowColor}`;
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+          }}
         >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-600 mb-1">
-                  {stat.label}
-                </p>
-                <p className={`text-2xl font-bold ${stat.color}`}>
-                  {stat.value}
-                </p>
+          {/* Background gradient overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: stat.gradient,
+              opacity: 0.1,
+              borderRadius: '20px',
+              transition: 'opacity 0.3s ease',
+            }}
+            className="group-hover:opacity-20"
+          ></div>
+
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <div
+                style={{
+                  fontSize: '2rem',
+                  background: stat.gradient,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                }}
+              >
+                {stat.icon}
               </div>
-              <div className="text-2xl opacity-60">{stat.icon}</div>
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  background: stat.gradient,
+                  borderRadius: '50%',
+                  boxShadow: `0 0 10px ${stat.shadowColor}`,
+                  animation: 'pulse 2s infinite',
+                }}
+              ></div>
             </div>
-          </CardContent>
-        </Card>
+
+            <div>
+              <div
+                style={{
+                  fontSize: '2.5rem',
+                  fontWeight: '700',
+                  background: stat.gradient,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  marginBottom: '0.5rem',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                }}
+              >
+                {stat.value}
+              </div>
+              <div
+                style={{
+                  fontSize: '0.875rem',
+                  color: '#64748b',
+                  fontWeight: '500',
+                  letterSpacing: '0.025em',
+                }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          </div>
+
+          {/* Animated border */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: `conic-gradient(from 0deg, transparent, ${stat.shadowColor}, transparent)`,
+              borderRadius: '20px',
+              padding: '1px',
+              opacity: 0,
+              transition: 'opacity 0.3s ease',
+            }}
+            className="group-hover:opacity-100"
+          >
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '19px',
+              }}
+            ></div>
+          </div>
+        </div>
       ))}
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            background-position: -200px 0;
+          }
+          100% {
+            background-position: 200px 0;
+          }
+        }
+      `}</style>
     </div>
   );
 }
