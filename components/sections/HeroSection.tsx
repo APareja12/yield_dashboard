@@ -1,9 +1,14 @@
 'use client';
 
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Card } from '@/components/ui/card';
 
 export default function HeroSection() {
+  const scrollToDashboard = () => {
+    document
+      .getElementById('dashboard')
+      ?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center">
       {/* Background Pattern */}
@@ -52,9 +57,12 @@ export default function HeroSection() {
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-            <ConnectButton />
-            <button className="px-8 py-3 text-slate-600 hover:text-slate-900 transition-colors">
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={scrollToDashboard}
+              className="px-8 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
+              style={{ backgroundColor: '#0f172a', color: 'white' }}
+            >
               View Dashboard →
             </button>
           </div>

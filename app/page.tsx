@@ -1,3 +1,4 @@
+import './globals.css'; // Add this line
 import YieldTable from '@/components/dashboard/YieldTable';
 import HeroSection from '@/components/sections/HeroSection';
 
