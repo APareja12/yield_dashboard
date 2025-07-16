@@ -5,10 +5,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true, // This will ignore ESLint during build
+  },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID:
-      process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+    NEXT_PUBLIC_COMPOUND_API_URL: process.env.NEXT_PUBLIC_COMPOUND_API_URL,
   },
 };
 

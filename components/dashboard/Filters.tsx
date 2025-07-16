@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 interface FiltersProps {
   searchTerm: string;
@@ -21,17 +21,11 @@ export default function Filters({
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Common crypto assets for suggestions
-  const commonAssets = [
-    'USDC',
-    'USDT',
-    'DAI',
-    'ETH',
-    'WBTC',
-    'WETH',
-    'AAVE',
-    'COMP',
-  ];
+  // Common crypto assets for suggestions - using useMemo to satisfy ESLint
+  const commonAssets = useMemo(
+    () => ['USDC', 'USDT', 'DAI', 'ETH', 'WBTC', 'WETH', 'AAVE', 'COMP'],
+    []
+  );
 
   useEffect(() => {
     if (searchTerm.length > 0) {
@@ -43,7 +37,7 @@ export default function Filters({
     } else {
       setShowSuggestions(false);
     }
-  }, [searchTerm]); // Fixed: Only include searchTerm in dependencies
+  }, [commonAssets, searchTerm]);
 
   const getProtocolIcon = (protocol: string) => {
     const icons: { [key: string]: string } = {
@@ -186,7 +180,7 @@ export default function Filters({
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search USDC, ETH, DAI..." // Fixed: Removed unescaped quotes
+              placeholder="Search USDC, ETH, DAI..."
               style={{
                 width: '100%',
                 padding: '1rem 1rem 1rem 3rem',
@@ -300,7 +294,10 @@ export default function Filters({
               style={{
                 padding: '0.75rem 1.25rem',
                 borderRadius: '16px',
-                border: 'none',
+                border:
+                  selectedProtocol === 'all'
+                    ? 'none'
+                    : '1px solid rgba(255, 255, 255, 0.2)',
                 fontSize: '0.875rem',
                 fontWeight: '600',
                 cursor: 'pointer',
@@ -315,10 +312,6 @@ export default function Filters({
                     ? '0 4px 15px rgba(102, 126, 234, 0.3)'
                     : '0 2px 8px rgba(0, 0, 0, 0.05)',
                 backdropFilter: 'blur(10px)',
-                border:
-                  selectedProtocol === 'all'
-                    ? 'none'
-                    : '1px solid rgba(255, 255, 255, 0.2)',
                 transform:
                   selectedProtocol === 'all'
                     ? 'translateY(-2px)'
@@ -356,7 +349,9 @@ export default function Filters({
                   style={{
                     padding: '0.75rem 1.25rem',
                     borderRadius: '16px',
-                    border: 'none',
+                    border: isSelected
+                      ? 'none'
+                      : '1px solid rgba(255, 255, 255, 0.2)',
                     fontSize: '0.875rem',
                     fontWeight: '600',
                     cursor: 'pointer',
@@ -369,9 +364,6 @@ export default function Filters({
                       ? `0 4px 15px ${config.shadow}`
                       : '0 2px 8px rgba(0, 0, 0, 0.05)',
                     backdropFilter: 'blur(10px)',
-                    border: isSelected
-                      ? 'none'
-                      : '1px solid rgba(255, 255, 255, 0.2)',
                     transform: isSelected
                       ? 'translateY(-2px)'
                       : 'translateY(0)',
