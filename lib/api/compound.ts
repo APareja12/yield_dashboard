@@ -1,8 +1,13 @@
 export async function getCompoundRates() {
   try {
     console.log('Fetching Compound data...');
-    const response = await fetch('https://api.compound.finance/api/v2/ctoken');
 
+    // Use environment variable instead of hardcoded URL
+    const apiUrl =
+      process.env.NEXT_PUBLIC_COMPOUND_API_URL ||
+      'https://api.compound.finance/api/v2/ctoken';
+
+    const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
