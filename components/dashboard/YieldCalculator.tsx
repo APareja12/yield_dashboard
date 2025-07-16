@@ -19,24 +19,25 @@ export default function YieldCalculator({ data }: YieldCalculatorProps) {
 
   const selectedData = data[selectedIndex];
 
-  const calculateYield = () => {
-    if (!selectedData || !investment) return 0;
-    const apy = parseFloat(selectedData.apy.replace('%', '')) / 100;
+  const [apy, setApy] = useState<string>('');
+
+  const calculateYield = (): number => {
+    if (!investment || !apy) return 0;
     const principal = parseFloat(investment);
-    const years = parseFloat(timeFrame);
-    return (principal * apy * years).toFixed(2);
+    const rate = parseFloat(apy) / 100;
+    return principal * rate;
   };
 
-  const totalReturn = () => {
-    if (!investment) return 0;
-    return (parseFloat(investment) + parseFloat(calculateYield())).toFixed(2);
+  const totalReturn = (): string => {
+    if (!investment) return '0';
+    const principal = parseFloat(investment);
+    const yieldAmount = calculateYield();
+    return (principal + yieldAmount).toFixed(2);
   };
 
-  const monthlyYield = () => {
-    if (!selectedData || !investment) return 0;
-    const apy = parseFloat(selectedData.apy.replace('%', '')) / 100;
-    const principal = parseFloat(investment);
-    return ((principal * apy) / 12).toFixed(2);
+  const monthlyYield = (): string => {
+    const yearlyYield = calculateYield();
+    return (yearlyYield / 12).toFixed(2);
   };
 
   // Trigger animation when values change
@@ -404,7 +405,7 @@ export default function YieldCalculator({ data }: YieldCalculatorProps) {
                       : 'none',
                   }}
                 >
-                  ${formatNumber(calculateYield())}
+                  ${formatNumber(calculateYield().toString())}
                 </p>
               </div>
             </div>
