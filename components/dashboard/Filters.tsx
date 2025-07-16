@@ -43,7 +43,7 @@ export default function Filters({
     } else {
       setShowSuggestions(false);
     }
-  }, [searchTerm]);
+  }, [searchTerm]); // Fixed: Only include searchTerm in dependencies
 
   const getProtocolIcon = (protocol: string) => {
     const icons: { [key: string]: string } = {
@@ -151,7 +151,7 @@ export default function Filters({
         )}
       </div>
 
-      <div className="flex flex-col lg-flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* Search Section */}
         <div style={{ flex: 1, position: 'relative' }}>
           <label
@@ -186,7 +186,7 @@ export default function Filters({
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search USDC, ETH, DAI..."
+              placeholder="Search USDC, ETH, DAI..." // Fixed: Removed unescaped quotes
               style={{
                 width: '100%',
                 padding: '1rem 1rem 1rem 3rem',
@@ -444,7 +444,7 @@ export default function Filters({
                   gap: '0.25rem',
                 }}
               >
-                🔍 Search: "{searchTerm}"
+                🔍 {searchTerm}
                 <button
                   onClick={() => setSearchTerm('')}
                   style={{

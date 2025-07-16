@@ -1,8 +1,21 @@
+interface CompoundToken {
+  symbol?: string;
+  supply_rate?: {
+    value: string;
+  };
+  total_supply?: {
+    value: string;
+  };
+}
+
+interface CompoundApiResponse {
+  cToken: CompoundToken[];
+}
+
 export async function getCompoundRates() {
   try {
     console.log('Fetching Compound data...');
 
-    // Use environment variable instead of hardcoded URL
     const apiUrl =
       process.env.NEXT_PUBLIC_COMPOUND_API_URL ||
       'https://api.compound.finance/api/v2/ctoken';
@@ -12,7 +25,7 @@ export async function getCompoundRates() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data: CompoundApiResponse = await response.json();
     console.log('Compound API response:', data);
 
     // Check if data structure is what we expect
@@ -21,7 +34,7 @@ export async function getCompoundRates() {
       return [];
     }
 
-    return data.cToken.slice(0, 5).map((token: any) => ({
+    return data.cToken.slice(0, 5).map((token: CompoundToken) => ({
       protocol: 'Compound',
       asset: token.symbol || 'Unknown',
       apy: token.supply_rate
