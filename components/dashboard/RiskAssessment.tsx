@@ -154,17 +154,17 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(255, 255, 255, 0.2)',
         borderRadius: '24px',
-        padding: '2rem',
+        padding: '1.5rem',
         marginBottom: '2rem',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         animation: 'fadeInUp 0.8s ease-out 0.4s both',
       }}
     >
       {/* Header */}
-      <div className="text-center mb-8">
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h3
           style={{
-            fontSize: '1.5rem',
+            fontSize: '1.25rem',
             fontWeight: '700',
             background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
             WebkitBackgroundClip: 'text',
@@ -175,7 +175,9 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
         >
           🛡️ Risk Assessment
         </h3>
-        <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
+        <p
+          style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: '1.4' }}
+        >
           Comprehensive risk analysis for each protocol and yield opportunity
         </p>
       </div>
@@ -190,23 +192,16 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
           marginBottom: '2rem',
         }}
       >
-        <div className="flex justify-center mb-4">
-          <div
-            style={{
-              display: 'flex',
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '12px',
-              padding: '0.25rem',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              gap: '0.25rem',
-            }}
-          >
+        {/* Mobile Layout */}
+        <div className="mobile-filter-layout">
+          {/* All Risks Button */}
+          <div style={{ marginBottom: '1rem' }}>
             <button
               onClick={() => setSelectedRiskLevel(null)}
               style={{
-                padding: '0.75rem 1.5rem',
-                borderRadius: '8px',
+                width: '100%',
+                padding: '1rem',
+                borderRadius: '12px',
                 border: 'none',
                 fontSize: '0.875rem',
                 fontWeight: '600',
@@ -215,16 +210,28 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                 background:
                   selectedRiskLevel === null
                     ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                    : 'transparent',
+                    : 'rgba(255, 255, 255, 0.1)',
                 color: selectedRiskLevel === null ? 'white' : '#64748b',
                 boxShadow:
                   selectedRiskLevel === null
                     ? '0 4px 12px rgba(102, 126, 234, 0.3)'
                     : 'none',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
               }}
             >
               All Risks ({data.length})
             </button>
+          </div>
+
+          {/* Risk Level Buttons */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '0.75rem',
+            }}
+          >
             {riskLevels.map((level, index) => {
               const risk = getRiskLevel(
                 '',
@@ -235,34 +242,119 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                   key={level}
                   onClick={() => setSelectedRiskLevel(level)}
                   style={{
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '8px',
-                    border: 'none',
-                    fontSize: '0.875rem',
+                    padding: '1rem 0.5rem',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    fontSize: '0.75rem',
                     fontWeight: '600',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     background:
                       selectedRiskLevel === level
                         ? risk.gradient
-                        : 'transparent',
+                        : 'rgba(255, 255, 255, 0.1)',
                     color: selectedRiskLevel === level ? 'white' : '#64748b',
                     boxShadow:
                       selectedRiskLevel === level
                         ? `0 4px 12px ${risk.shadow}`
                         : 'none',
+                    backdropFilter: 'blur(10px)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    textAlign: 'center',
                   }}
                 >
-                  {risk.icon} {level} ({riskCounts[index]})
+                  <span style={{ fontSize: '1.5rem' }}>{risk.icon}</span>
+                  <div>
+                    <div style={{ marginBottom: '0.25rem' }}>{level}</div>
+                    <div style={{ fontSize: '0.625rem', opacity: 0.8 }}>
+                      ({riskCounts[index]})
+                    </div>
+                  </div>
                 </button>
               );
             })}
           </div>
         </div>
+
+        {/* Desktop Layout */}
+        <div className="desktop-filter-layout">
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '0.25rem',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                gap: '0.25rem',
+              }}
+            >
+              <button
+                onClick={() => setSelectedRiskLevel(null)}
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  background:
+                    selectedRiskLevel === null
+                      ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                      : 'transparent',
+                  color: selectedRiskLevel === null ? 'white' : '#64748b',
+                  boxShadow:
+                    selectedRiskLevel === null
+                      ? '0 4px 12px rgba(102, 126, 234, 0.3)'
+                      : 'none',
+                }}
+              >
+                All Risks ({data.length})
+              </button>
+              {riskLevels.map((level, index) => {
+                const risk = getRiskLevel(
+                  '',
+                  level === 'High' ? '10%' : level === 'Medium' ? '6%' : '3%'
+                );
+                return (
+                  <button
+                    key={level}
+                    onClick={() => setSelectedRiskLevel(level)}
+                    style={{
+                      padding: '0.75rem 1.5rem',
+                      borderRadius: '8px',
+                      border: 'none',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      background:
+                        selectedRiskLevel === level
+                          ? risk.gradient
+                          : 'transparent',
+                      color: selectedRiskLevel === level ? 'white' : '#64748b',
+                      boxShadow:
+                        selectedRiskLevel === level
+                          ? `0 4px 12px ${risk.shadow}`
+                          : 'none',
+                    }}
+                  >
+                    {risk.icon} {level} ({riskCounts[index]})
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Risk Cards Grid */}
-      <div className="grid grid-cols-1 md-grid-cols-2 lg-grid-cols-3 gap-6">
+      <div className="risk-cards-grid">
         {filteredData.slice(0, 9).map((item, index) => {
           const risk = getRiskLevel(item.protocol, item.apy);
           const factors = getRiskFactors(item.protocol);
@@ -276,7 +368,7 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                     ? risk.bgGradient
                     : 'rgba(255, 255, 255, 0.08)',
                 backdropFilter: 'blur(15px)',
-                borderRadius: '20px',
+                borderRadius: '16px',
                 padding: '1.5rem',
                 border:
                   hoveredCard === index
@@ -290,7 +382,7 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                     : '0 4px 20px rgba(0, 0, 0, 0.1)',
                 transform:
                   hoveredCard === index
-                    ? 'translateY(-8px) scale(1.02)'
+                    ? 'translateY(-4px) scale(1.01)'
                     : 'translateY(0) scale(1)',
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
@@ -298,48 +390,67 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Header */}
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <div
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginBottom: '1rem',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flex: 1,
+                    minWidth: 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      background: risk.gradient,
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginRight: '0.75rem',
+                      fontSize: '1rem',
+                      fontWeight: '700',
+                      color: 'white',
+                      boxShadow: `0 4px 12px ${risk.shadow}`,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {item.protocol[0]}
+                  </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <h4
                       style={{
-                        width: '40px',
-                        height: '40px',
-                        background: risk.gradient,
-                        borderRadius: '12px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginRight: '0.75rem',
-                        fontSize: '1.125rem',
                         fontWeight: '700',
-                        color: 'white',
-                        boxShadow: `0 4px 12px ${risk.shadow}`,
+                        fontSize: '1.125rem',
+                        color: '#1e293b',
+                        marginBottom: '0.25rem',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
                       }}
                     >
-                      {item.protocol[0]}
-                    </div>
-                    <div>
-                      <h4
-                        style={{
-                          fontWeight: '700',
-                          fontSize: '1.125rem',
-                          color: '#1e293b',
-                          marginBottom: '0.25rem',
-                        }}
-                      >
-                        {item.protocol}
-                      </h4>
-                      <p
-                        style={{
-                          fontSize: '0.875rem',
-                          color: '#64748b',
-                          fontWeight: '500',
-                        }}
-                      >
-                        {item.asset}
-                      </p>
-                    </div>
+                      {item.protocol}
+                    </h4>
+                    <p
+                      style={{
+                        fontSize: '0.875rem',
+                        color: '#64748b',
+                        fontWeight: '500',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {item.asset}
+                    </p>
                   </div>
                 </div>
 
@@ -356,6 +467,8 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.25rem',
+                    flexShrink: 0,
+                    marginLeft: '0.5rem',
                   }}
                 >
                   {risk.icon} {risk.level}
@@ -363,11 +476,18 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
               </div>
 
               {/* Metrics */}
-              <div className="flex justify-between items-center mb-4">
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '1rem',
+                }}
+              >
                 <div>
                   <p
                     style={{
-                      fontSize: '1.5rem',
+                      fontSize: '1.75rem',
                       fontWeight: '700',
                       background: risk.gradient,
                       WebkitBackgroundClip: 'text',
@@ -383,7 +503,7 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                 <div style={{ textAlign: 'right' }}>
                   <p
                     style={{
-                      fontSize: '1rem',
+                      fontSize: '1.125rem',
                       fontWeight: '600',
                       color: '#1e293b',
                       marginBottom: '0.25rem',
@@ -397,7 +517,14 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
 
               {/* Risk Score Bar */}
               <div style={{ marginBottom: '1rem' }}>
-                <div className="flex justify-between items-center mb-2">
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '0.5rem',
+                  }}
+                >
                   <span
                     style={{
                       fontSize: '0.75rem',
@@ -465,7 +592,7 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        padding: '0.5rem',
+                        padding: '0.75rem',
                         background: 'rgba(255, 255, 255, 0.1)',
                         borderRadius: '8px',
                         border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -476,18 +603,21 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                           fontSize: '0.75rem',
                           color: '#374151',
                           fontWeight: '500',
+                          flex: 1,
+                          marginRight: '0.5rem',
                         }}
                       >
                         {factor.name}
                       </span>
                       <span
                         style={{
-                          fontSize: '0.625rem',
+                          fontSize: '0.675rem',
                           fontWeight: '700',
                           color: getSeverityColor(factor.severity),
                           background: `${getSeverityColor(factor.severity)}15`,
                           padding: '0.25rem 0.5rem',
                           borderRadius: '12px',
+                          flexShrink: 0,
                         }}
                       >
                         {factor.severity}
@@ -510,6 +640,44 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        /* Mobile-first: Show mobile layout by default */
+        .mobile-filter-layout {
+          display: block;
+        }
+
+        .desktop-filter-layout {
+          display: none;
+        }
+
+        .risk-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: 1rem;
+        }
+
+        /* Desktop breakpoints */
+        @media (min-width: 768px) {
+          /* Hide mobile layout, show desktop layout */
+          .mobile-filter-layout {
+            display: none;
+          }
+
+          .desktop-filter-layout {
+            display: block;
+          }
+
+          .risk-cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .risk-cards-grid {
+            grid-template-columns: repeat(3, 1fr);
           }
         }
       `}</style>
