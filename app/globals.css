@@ -249,29 +249,39 @@ button.text-white {
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* Responsive grid - simplified without escape characters */
+/* Mobile-first responsive breakpoints */
+@media (min-width: 375px) {
+  .xs\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .xs\:text-lg { font-size: 1.125rem; }
+  .xs\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+}
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .sm\:text-xl { font-size: 1.25rem; }
+  .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .sm\:flex-row { flex-direction: row; }
+}
+
 @media (min-width: 768px) {
-  .md-grid-cols-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .md-grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .md-grid-cols-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .md-text-7xl {
-    font-size: 4.5rem;
-  }
-  .md-text-2xl {
-    font-size: 1.5rem;
-  }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md\:text-2xl { font-size: 1.5rem; }
+  .md\:text-4xl { font-size: 2.25rem; }
+  .md\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .md\:block { display: block; }
 }
 
 @media (min-width: 1024px) {
-  .lg-grid-cols-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .lg\:text-3xl { font-size: 1.875rem; }
+  .lg\:text-6xl { font-size: 3.75rem; }
+}
+
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .xl\:text-7xl { font-size: 4.5rem; }
 }
 
 /* Flexbox utilities */
@@ -815,11 +825,27 @@ select:focus {
   background-color: rgba(248, 250, 252, 0.5);
 }
 
-/* Responsive utilities */
+/* Enhanced responsive utilities */
+@media (max-width: 374px) {
+  .mobile-only { display: block; }
+  .mobile-hidden { display: none; }
+}
+
+@media (min-width: 375px) and (max-width: 639px) {
+  .xs-only { display: block; }
+  .xs-hidden { display: none; }
+}
+
 @media (min-width: 640px) {
-  .sm-flex-row {
-    flex-direction: row;
-  }
+  .sm\:flex-row { flex-direction: row; }
+  .sm\:space-x-4 > * + * { margin-left: 1rem; }
+  .sm\:space-y-0 > * + * { margin-top: 0; }
+}
+
+@media (max-width: 767px) {
+  .mobile-stack { flex-direction: column; }
+  .mobile-full { width: 100%; }
+  .mobile-center { text-align: center; }
 }
 
 /* Badge and pill styling */
