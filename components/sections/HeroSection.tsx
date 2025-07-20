@@ -169,17 +169,12 @@ export default function HeroSection() {
 
           {/* Hero Stats Cards */}
           <div
+            className="hero-stats-grid"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(1, 1fr)',
-              gap: '1.5rem',
-              maxWidth: '20rem',
-              margin: '0 auto 3rem auto',
               animation: isLoaded
                 ? 'fadeInScale 1.2s ease-out 0.3s both'
                 : 'none',
             }}
-            className="sm:grid-cols-3 sm:max-w-4xl sm:gap-8 lg:max-w-5xl"
           >
             {heroStats.map((stat, index) => (
               <div
@@ -384,7 +379,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Scroll Indicator - Hidden on mobile */}
+          {/* Scroll Indicator */}
           <div
             style={{
               position: 'absolute',
@@ -394,7 +389,7 @@ export default function HeroSection() {
               animation: isLoaded ? 'bounceIn 1s ease-out 1s both' : 'none',
               display: 'none',
             }}
-            className="md:block"
+            className="scroll-indicator"
           >
             <div
               style={{
@@ -513,133 +508,158 @@ export default function HeroSection() {
           }
         }
 
+        /* Hero stats grid responsive */
+        .hero-stats-grid {
+          display: grid !important;
+          grid-template-columns: repeat(1, 1fr) !important;
+          gap: 1.5rem !important;
+          max-width: 20rem !important;
+          margin: 0 auto 3rem auto !important;
+        }
+
+        /* Scroll indicator - hidden on mobile, visible on desktop */
+        .scroll-indicator {
+          display: none;
+        }
+
         @media (min-width: 640px) {
+          .hero-stats-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            max-width: 56rem !important;
+            gap: 2rem !important;
+          }
+          
           .sm\\:grid-cols-3 {
             grid-template-columns: repeat(3, 1fr);
           }
-
+          
           .sm\\:flex {
             display: flex;
           }
-
+          
           .sm\\:flex-row {
             flex-direction: row;
           }
-
+          
           .sm\\:gap-6 {
             gap: 1.5rem;
           }
-
+          
           .sm\\:gap-8 {
             gap: 2rem;
           }
-
+          
           .sm\\:mb-6 {
             margin-bottom: 1.5rem;
           }
-
+          
           .sm\\:mb-12 {
             margin-bottom: 3rem;
           }
-
+          
           .sm\\:max-w-4xl {
             max-width: 56rem;
           }
-
+          
           .sm\\:w-auto {
             width: auto;
           }
-
+          
           .sm\\:px-0 {
             padding-left: 0;
             padding-right: 0;
           }
-
+          
           .sm\\:px-6 {
             padding-left: 1.5rem;
             padding-right: 1.5rem;
           }
-
+          
           .sm\\:px-8 {
             padding-left: 2rem;
             padding-right: 2rem;
           }
-
+          
           .sm\\:py-3 {
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
           }
-
+          
           .sm\\:py-16 {
             padding-top: 4rem;
             padding-bottom: 4rem;
           }
-
+          
           .sm\\:p-8 {
             padding: 2rem;
           }
-
+          
           .sm\\:text-sm {
             font-size: 0.875rem;
           }
-
+          
           .sm\\:text-base {
             font-size: 1rem;
           }
-
+          
           .sm\\:text-lg {
             font-size: 1.125rem;
           }
-
+          
           .sm\\:text-xl {
             font-size: 1.25rem;
           }
-
+          
           .sm\\:text-4xl {
             font-size: 2.25rem;
           }
-
+          
           .sm\\:text-5xl {
             font-size: 3rem;
           }
-
+          
           .sm\\:max-w-none {
             max-width: none;
           }
-
+          
           .sm\\:justify-center {
             justify-content: center;
           }
-
+          
           .sm\\:text-left {
             text-align: left;
           }
-
+          
           .sm\\:bg-transparent {
             background-color: transparent;
           }
-
+          
           .sm\\:border-0 {
             border-width: 0;
           }
         }
 
         @media (min-width: 768px) {
-          .md\\:block {
+          .scroll-indicator {
             display: block;
           }
         }
 
         @media (min-width: 1024px) {
-          .lg\\:max-w-5xl {
+          .hero-stats-grid {
             max-width: 64rem;
           }
 
+        @media (min-width: 1024px) {
+          .lg\\:max-w-5xl {
+            max-width: 64rem;
+          }
+          
           .lg\\:px-8 {
             padding-left: 2rem;
             padding-right: 2rem;
           }
-
+          
           .lg\\:py-20 {
             padding-top: 5rem;
             padding-bottom: 5rem;
