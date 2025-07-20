@@ -75,7 +75,7 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Floating Shapes */}
+      {/* Floating Shapes - Hidden on mobile */}
       <div
         style={{
           position: 'absolute',
@@ -88,7 +88,9 @@ export default function HeroSection() {
           right: '10%',
           animation: 'float 6s ease-in-out infinite',
           backdropFilter: 'blur(20px)',
+          display: 'none',
         }}
+        className="md:block"
       />
       <div
         style={{
@@ -102,24 +104,27 @@ export default function HeroSection() {
           left: '15%',
           animation: 'float 8s ease-in-out infinite reverse',
           backdropFilter: 'blur(15px)',
+          display: 'none',
         }}
+        className="md:block"
       />
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading */}
           <div
             style={{
-              marginBottom: '3rem',
+              marginBottom: '2rem',
               animation: isLoaded ? 'slideInUp 1s ease-out' : 'none',
             }}
+            className="sm:mb-12"
           >
             <h1
               style={{
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                fontSize: 'clamp(2rem, 8vw, 6rem)',
                 fontWeight: '800',
                 lineHeight: '1.1',
-                marginBottom: '1.5rem',
+                marginBottom: '1rem',
                 backgroundImage:
                   'linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%)',
                 WebkitBackgroundClip: 'text',
@@ -128,6 +133,7 @@ export default function HeroSection() {
                 textShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                 letterSpacing: '-0.02em',
               }}
+              className="sm:mb-6"
             >
               DeFi Yields
               <br />
@@ -145,13 +151,15 @@ export default function HeroSection() {
             </h1>
             <p
               style={{
-                fontSize: 'clamp(1.125rem, 3vw, 1.5rem)',
+                fontSize: 'clamp(1rem, 3vw, 1.5rem)',
                 color: 'rgba(255, 255, 255, 0.9)',
                 maxWidth: '48rem',
                 margin: '0 auto',
                 lineHeight: '1.6',
                 fontWeight: '400',
+                padding: '0 1rem',
               }}
+              className="sm:px-0"
             >
               Discover the highest yield opportunities across leading DeFi
               protocols. All in one beautiful, intuitive dashboard with
@@ -163,14 +171,15 @@ export default function HeroSection() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: '2rem',
-              maxWidth: '60rem',
-              margin: '0 auto 4rem auto',
+              gridTemplateColumns: 'repeat(1, 1fr)',
+              gap: '1.5rem',
+              maxWidth: '20rem',
+              margin: '0 auto 3rem auto',
               animation: isLoaded
                 ? 'fadeInScale 1.2s ease-out 0.3s both'
                 : 'none',
             }}
+            className="sm:grid-cols-3 sm:max-w-4xl sm:gap-8 lg:max-w-5xl"
           >
             {heroStats.map((stat, index) => (
               <div
@@ -179,14 +188,15 @@ export default function HeroSection() {
                   background: 'rgba(255, 255, 255, 0.1)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '24px',
-                  padding: '2rem',
+                  borderRadius: '20px',
+                  padding: '1.5rem',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
                   animation: isLoaded
                     ? `slideInUp 1s ease-out ${stat.delay} both`
                     : 'none',
                 }}
+                className="sm:p-8"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform =
                     'translateY(-8px) scale(1.02)';
@@ -202,7 +212,7 @@ export default function HeroSection() {
               >
                 <div
                   style={{
-                    fontSize: '3rem',
+                    fontSize: '2.5rem',
                     marginBottom: '1rem',
                     backgroundImage: stat.gradient,
                     WebkitBackgroundClip: 'text',
@@ -210,17 +220,19 @@ export default function HeroSection() {
                     backgroundClip: 'text',
                     filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
                   }}
+                  className="sm:text-5xl"
                 >
                   {stat.icon}
                 </div>
                 <div
                   style={{
-                    fontSize: '2.5rem',
+                    fontSize: '2rem',
                     fontWeight: '700',
                     color: 'white',
                     marginBottom: '0.5rem',
                     textShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
                   }}
+                  className="sm:text-4xl"
                 >
                   {stat.value}
                 </div>
@@ -231,6 +243,7 @@ export default function HeroSection() {
                     fontWeight: '500',
                     letterSpacing: '0.025em',
                   }}
+                  className="sm:text-base"
                 >
                   {stat.label}
                 </div>
@@ -244,7 +257,7 @@ export default function HeroSection() {
               animation: isLoaded ? 'slideInUp 1s ease-out 0.6s both' : 'none',
             }}
           >
-            <div className="flex flex-col sm-flex-row gap-4 justify-center items-center mb-12">
+            <div className="flex flex-col gap-4 justify-center items-center mb-8 sm:flex-row sm:gap-6 sm:mb-12">
               <button
                 onClick={scrollToDashboard}
                 style={{
@@ -252,8 +265,8 @@ export default function HeroSection() {
                   backdropFilter: 'blur(20px)',
                   border: '2px solid rgba(255, 255, 255, 0.3)',
                   borderRadius: '16px',
-                  padding: '1rem 2.5rem',
-                  fontSize: '1.125rem',
+                  padding: '1rem 2rem',
+                  fontSize: '1rem',
                   fontWeight: '600',
                   color: 'white',
                   cursor: 'pointer',
@@ -262,7 +275,10 @@ export default function HeroSection() {
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                   position: 'relative',
                   overflow: 'hidden',
+                  width: '100%',
+                  maxWidth: '280px',
                 }}
+                className="sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform =
                     'translateY(-4px) scale(1.05)';
@@ -293,13 +309,16 @@ export default function HeroSection() {
                   border: 'none',
                   borderRadius: '16px',
                   padding: '1rem 2rem',
-                  fontSize: '1.125rem',
+                  fontSize: '1rem',
                   fontWeight: '600',
                   color: 'rgba(255, 255, 255, 0.9)',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                  width: '100%',
+                  maxWidth: '280px',
                 }}
+                className="sm:w-auto sm:text-lg"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'white';
                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
@@ -318,12 +337,14 @@ export default function HeroSection() {
             {/* Feature Highlights */}
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-                gap: '2rem',
-                marginBottom: '3rem',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '1rem',
+                marginBottom: '2rem',
+                maxWidth: '20rem',
+                margin: '0 auto 2rem auto',
               }}
+              className="sm:flex sm:justify-center sm:gap-8 sm:max-w-none sm:mb-12"
             >
               {[
                 { icon: '⚡', text: 'Real-time Data' },
@@ -336,23 +357,34 @@ export default function HeroSection() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '0.5rem',
                     color: 'rgba(255, 255, 255, 0.9)',
-                    fontSize: '0.875rem',
+                    fontSize: '0.8rem',
                     fontWeight: '500',
                     animation: isLoaded
                       ? `fadeIn 1s ease-out ${0.8 + index * 0.1}s both`
                       : 'none',
+                    padding: '0.75rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    borderRadius: '12px',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
                   }}
+                  className="sm:bg-transparent sm:border-0 sm:p-0 sm:text-sm"
                 >
-                  <span style={{ fontSize: '1.25rem' }}>{feature.icon}</span>
-                  {feature.text}
+                  <span style={{ fontSize: '1rem' }} className="sm:text-xl">
+                    {feature.icon}
+                  </span>
+                  <span className="text-center sm:text-left">
+                    {feature.text}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Scroll Indicator */}
+          {/* Scroll Indicator - Hidden on mobile */}
           <div
             style={{
               position: 'absolute',
@@ -360,7 +392,9 @@ export default function HeroSection() {
               left: '50%',
               transform: 'translateX(-50%)',
               animation: isLoaded ? 'bounceIn 1s ease-out 1s both' : 'none',
+              display: 'none',
             }}
+            className="md:block"
           >
             <div
               style={{
@@ -471,13 +505,144 @@ export default function HeroSection() {
           }
         }
 
-        .sm-flex-row {
-          flex-direction: row;
+        /* Mobile-first responsive design */
+        @media (max-width: 640px) {
+          .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
         }
 
-        @media (max-width: 640px) {
-          .sm-flex-row {
-            flex-direction: column;
+        @media (min-width: 640px) {
+          .sm\\:grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          .sm\\:flex {
+            display: flex;
+          }
+
+          .sm\\:flex-row {
+            flex-direction: row;
+          }
+
+          .sm\\:gap-6 {
+            gap: 1.5rem;
+          }
+
+          .sm\\:gap-8 {
+            gap: 2rem;
+          }
+
+          .sm\\:mb-6 {
+            margin-bottom: 1.5rem;
+          }
+
+          .sm\\:mb-12 {
+            margin-bottom: 3rem;
+          }
+
+          .sm\\:max-w-4xl {
+            max-width: 56rem;
+          }
+
+          .sm\\:w-auto {
+            width: auto;
+          }
+
+          .sm\\:px-0 {
+            padding-left: 0;
+            padding-right: 0;
+          }
+
+          .sm\\:px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+          }
+
+          .sm\\:px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+          }
+
+          .sm\\:py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+          }
+
+          .sm\\:py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+          }
+
+          .sm\\:p-8 {
+            padding: 2rem;
+          }
+
+          .sm\\:text-sm {
+            font-size: 0.875rem;
+          }
+
+          .sm\\:text-base {
+            font-size: 1rem;
+          }
+
+          .sm\\:text-lg {
+            font-size: 1.125rem;
+          }
+
+          .sm\\:text-xl {
+            font-size: 1.25rem;
+          }
+
+          .sm\\:text-4xl {
+            font-size: 2.25rem;
+          }
+
+          .sm\\:text-5xl {
+            font-size: 3rem;
+          }
+
+          .sm\\:max-w-none {
+            max-width: none;
+          }
+
+          .sm\\:justify-center {
+            justify-content: center;
+          }
+
+          .sm\\:text-left {
+            text-align: left;
+          }
+
+          .sm\\:bg-transparent {
+            background-color: transparent;
+          }
+
+          .sm\\:border-0 {
+            border-width: 0;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .md\\:block {
+            display: block;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .lg\\:max-w-5xl {
+            max-width: 64rem;
+          }
+
+          .lg\\:px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+          }
+
+          .lg\\:py-20 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
           }
         }
       `}</style>
