@@ -67,7 +67,9 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedProtocol, setSelectedProtocol] = useState('all');
 
-  const uniqueProtocols = Array.from(new Set(mockData.map(item => item.protocol)));
+  const uniqueProtocols = Array.from(
+    new Set(mockData.map((item) => item.protocol))
+  );
 
   return (
     <div className="min-h-screen">
@@ -79,7 +81,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <StatsCards data={mockData} />
-          
+
           <Filters
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -87,18 +89,18 @@ export default function Home() {
             setSelectedProtocol={setSelectedProtocol}
             protocols={uniqueProtocols}
           />
-          
+
           <PortfolioTracker />
-          
+
           <YieldCalculator data={mockData} />
-          
+
           <YieldChart />
-          
+
           <RiskAssessment data={mockData} />
-          
+
           <OpportunitiesTable data={mockData} />
-          
-          <YieldTable />
+
+          {/* <YieldTable /> */}
         </div>
       </section>
     </div>

@@ -19,6 +19,35 @@ body {
   padding: 0 1rem;
 }
 
+/* Section spacing - ADD THIS */
+section {
+  margin-bottom: 4rem;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+/* Better section spacing for specific cases */
+.section-spacing {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .section-spacing {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
 /* Typography */
 h1 {
   font-size: 3.75rem;
@@ -251,37 +280,147 @@ button.text-white {
 
 /* Mobile-first responsive breakpoints */
 @media (min-width: 375px) {
-  .xs\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-  .xs\:text-lg { font-size: 1.125rem; }
-  .xs\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .xs\:grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .xs\:text-lg {
+    font-size: 1.125rem;
+  }
+  .xs\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @media (min-width: 640px) {
-  .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .sm\:text-xl { font-size: 1.25rem; }
-  .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-  .sm\:flex-row { flex-direction: row; }
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sm\:text-xl {
+    font-size: 1.25rem;
+  }
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+  .sm\:mb-8 {
+    margin-bottom: 2rem;
+  }
+  .sm\:mb-12 {
+    margin-bottom: 3rem;
+  }
+  .sm\:mb-16 {
+    margin-bottom: 4rem;
+  }
+  .sm\:mb-20 {
+    margin-bottom: 5rem;
+  }
+  .sm\:mt-8 {
+    margin-top: 2rem;
+  }
+  .sm\:mt-12 {
+    margin-top: 3rem;
+  }
+  .sm\:mt-16 {
+    margin-top: 4rem;
+  }
+  .sm\:mt-20 {
+    margin-top: 5rem;
+  }
 }
 
 @media (min-width: 768px) {
-  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .md\:text-2xl { font-size: 1.5rem; }
-  .md\:text-4xl { font-size: 2.25rem; }
-  .md\:px-8 { padding-left: 2rem; padding-right: 2rem; }
-  .md\:block { display: block; }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .md\:text-2xl {
+    font-size: 1.5rem;
+  }
+  .md\:text-4xl {
+    font-size: 2.25rem;
+  }
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .md\:block {
+    display: block;
+  }
+  .md\:mb-16 {
+    margin-bottom: 4rem;
+  }
+  .md\:mb-20 {
+    margin-bottom: 5rem;
+  }
+  .md\:mb-24 {
+    margin-bottom: 6rem;
+  }
+  .md\:mt-16 {
+    margin-top: 4rem;
+  }
+  .md\:mt-20 {
+    margin-top: 5rem;
+  }
+  .md\:mt-24 {
+    margin-top: 6rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-  .lg\:text-3xl { font-size: 1.875rem; }
-  .lg\:text-6xl { font-size: 3.75rem; }
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+  }
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+  }
+  .lg\:mb-20 {
+    margin-bottom: 5rem;
+  }
+  .lg\:mb-24 {
+    margin-bottom: 6rem;
+  }
+  .lg\:mb-32 {
+    margin-bottom: 8rem;
+  }
+  .lg\:mt-20 {
+    margin-top: 5rem;
+  }
+  .lg\:mt-24 {
+    margin-top: 6rem;
+  }
+  .lg\:mt-32 {
+    margin-top: 8rem;
+  }
 }
 
 @media (min-width: 1280px) {
-  .xl\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-  .xl\:text-7xl { font-size: 4.5rem; }
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .xl\:text-7xl {
+    font-size: 4.5rem;
+  }
+  .xl\:mb-32 {
+    margin-bottom: 8rem;
+  }
+  .xl\:mt-32 {
+    margin-top: 8rem;
+  }
 }
 
 /* Flexbox utilities */
@@ -446,7 +585,7 @@ tr:hover {
   --tw-gradient-to: #9333ea;
 }
 
-/* Spacing */
+/* Spacing utilities - ENHANCED */
 .p-0 {
   padding: 0;
 }
@@ -503,6 +642,7 @@ tr:hover {
   padding-bottom: 0.5rem;
 }
 
+/* Margin utilities - ENHANCED */
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -515,12 +655,40 @@ tr:hover {
   margin-top: 1rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mt-32 {
+  margin-top: 8rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .mb-6 {
@@ -531,8 +699,24 @@ tr:hover {
   margin-bottom: 2rem;
 }
 
-.mt-12 {
-  margin-top: 3rem;
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
+.mb-32 {
+  margin-bottom: 8rem;
 }
 
 /* Positioning */
@@ -827,25 +1011,45 @@ select:focus {
 
 /* Enhanced responsive utilities */
 @media (max-width: 374px) {
-  .mobile-only { display: block; }
-  .mobile-hidden { display: none; }
+  .mobile-only {
+    display: block;
+  }
+  .mobile-hidden {
+    display: none;
+  }
 }
 
 @media (min-width: 375px) and (max-width: 639px) {
-  .xs-only { display: block; }
-  .xs-hidden { display: none; }
+  .xs-only {
+    display: block;
+  }
+  .xs-hidden {
+    display: none;
+  }
 }
 
 @media (min-width: 640px) {
-  .sm\:flex-row { flex-direction: row; }
-  .sm\:space-x-4 > * + * { margin-left: 1rem; }
-  .sm\:space-y-0 > * + * { margin-top: 0; }
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+  .sm\:space-x-4 > * + * {
+    margin-left: 1rem;
+  }
+  .sm\:space-y-0 > * + * {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 767px) {
-  .mobile-stack { flex-direction: column; }
-  .mobile-full { width: 100%; }
-  .mobile-center { text-align: center; }
+  .mobile-stack {
+    flex-direction: column;
+  }
+  .mobile-full {
+    width: 100%;
+  }
+  .mobile-center {
+    text-align: center;
+  }
 }
 
 /* Badge and pill styling */
@@ -900,4 +1104,24 @@ select {
 /* Last child border */
 .last\:border-b-0:last-child {
   border-bottom-width: 0px;
+}
+
+/* ADDITIONAL SECTION SPACING UTILITIES */
+.section-gap {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .section-gap {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-gap {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+  }
 }
