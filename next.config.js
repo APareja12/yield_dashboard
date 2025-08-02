@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  // Only use static export for production builds
+  ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
+  ...(process.env.NODE_ENV === 'production' && { trailingSlash: true }),
+
   images: {
     unoptimized: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // This will ignore ESLint during build
+    ignoreDuringBuilds: true,
   },
   env: {
     NEXT_PUBLIC_COMPOUND_API_URL: process.env.NEXT_PUBLIC_COMPOUND_API_URL,

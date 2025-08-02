@@ -3,16 +3,20 @@
 import { useState, useEffect } from 'react';
 
 export default function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 }); // Default values
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
 
     const handleMouseMove = (e: MouseEvent) => {
+      // Ensure we always have valid numbers
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+
       setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
+        x: isNaN(x) ? 50 : x,
+        y: isNaN(y) ? 50 : y,
       });
     };
 
@@ -65,12 +69,14 @@ export default function HeroSection() {
         overflow: 'hidden',
       }}
     >
-      {/* Animated Background Elements */}
+      {/* Animated Background Elements - Fixed the mousePosition issue */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)`,
+          background: `radial-gradient(circle at ${mousePosition.x || 50}% ${
+            mousePosition.y || 50
+          }%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)`,
           transition: 'background 0.3s ease',
         }}
       />
@@ -109,7 +115,7 @@ export default function HeroSection() {
         className="md:block"
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:py-20 lg:py-24 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading */}
           <div
@@ -178,7 +184,7 @@ export default function HeroSection() {
           >
             {heroStats.map((stat, index) => (
               <div
-                key={index}
+                key={stat.label} // Better key than index
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
                   backdropFilter: 'blur(20px)',
@@ -348,7 +354,7 @@ export default function HeroSection() {
                 { icon: '🔄', text: 'Auto-compound' },
               ].map((feature, index) => (
                 <div
-                  key={index}
+                  key={feature.text}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -528,112 +534,112 @@ export default function HeroSection() {
             max-width: 56rem !important;
             gap: 2rem !important;
           }
-          
+
           .sm\\:grid-cols-3 {
             grid-template-columns: repeat(3, 1fr);
           }
-          
+
           .sm\\:flex {
             display: flex;
           }
-          
+
           .sm\\:flex-row {
             flex-direction: row;
           }
-          
+
           .sm\\:gap-6 {
             gap: 1.5rem;
           }
-          
+
           .sm\\:gap-8 {
             gap: 2rem;
           }
-          
+
           .sm\\:mb-6 {
             margin-bottom: 1.5rem;
           }
-          
+
           .sm\\:mb-12 {
             margin-bottom: 3rem;
           }
-          
+
           .sm\\:max-w-4xl {
             max-width: 56rem;
           }
-          
+
           .sm\\:w-auto {
             width: auto;
           }
-          
+
           .sm\\:px-0 {
             padding-left: 0;
             padding-right: 0;
           }
-          
+
           .sm\\:px-6 {
             padding-left: 1.5rem;
             padding-right: 1.5rem;
           }
-          
+
           .sm\\:px-8 {
             padding-left: 2rem;
             padding-right: 2rem;
           }
-          
+
           .sm\\:py-3 {
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
           }
-          
+
           .sm\\:py-16 {
             padding-top: 4rem;
             padding-bottom: 4rem;
           }
-          
+
           .sm\\:p-8 {
             padding: 2rem;
           }
-          
+
           .sm\\:text-sm {
             font-size: 0.875rem;
           }
-          
+
           .sm\\:text-base {
             font-size: 1rem;
           }
-          
+
           .sm\\:text-lg {
             font-size: 1.125rem;
           }
-          
+
           .sm\\:text-xl {
             font-size: 1.25rem;
           }
-          
+
           .sm\\:text-4xl {
             font-size: 2.25rem;
           }
-          
+
           .sm\\:text-5xl {
             font-size: 3rem;
           }
-          
+
           .sm\\:max-w-none {
             max-width: none;
           }
-          
+
           .sm\\:justify-center {
             justify-content: center;
           }
-          
+
           .sm\\:text-left {
             text-align: left;
           }
-          
+
           .sm\\:bg-transparent {
             background-color: transparent;
           }
-          
+
           .sm\\:border-0 {
             border-width: 0;
           }
@@ -650,16 +656,15 @@ export default function HeroSection() {
             max-width: 64rem;
           }
 
-        @media (min-width: 1024px) {
           .lg\\:max-w-5xl {
             max-width: 64rem;
           }
-          
+
           .lg\\:px-8 {
             padding-left: 2rem;
             padding-right: 2rem;
           }
-          
+
           .lg\\:py-20 {
             padding-top: 5rem;
             padding-bottom: 5rem;

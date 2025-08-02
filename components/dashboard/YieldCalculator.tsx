@@ -19,12 +19,10 @@ export default function YieldCalculator({ data }: YieldCalculatorProps) {
 
   const selectedData = data[selectedIndex];
 
-  const [apy, setApy] = useState<string>('');
-
   const calculateYield = (): number => {
-    if (!investment || !apy) return 0;
+    if (!investment || !selectedData?.apy) return 0;
     const principal = parseFloat(investment);
-    const rate = parseFloat(apy) / 100;
+    const rate = parseFloat(selectedData.apy.replace('%', '')) / 100;
     return principal * rate;
   };
 

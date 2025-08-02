@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 
 interface YieldOpportunity {
@@ -137,8 +136,8 @@ export default function YieldTable() {
   };
 
   const sortedData = [...mockData].sort((a, b) => {
-    let aVal = a[sortField];
-    let bVal = b[sortField];
+    let aVal: any = a[sortField];
+    let bVal: any = b[sortField];
 
     if (sortField === 'apy') {
       aVal = parseFloat(a.apy.replace('%', ''));
@@ -213,7 +212,6 @@ export default function YieldTable() {
             Live data • {sortedData.length} opportunities
           </p>
         </div>
-
         <div className="flex flex-col sm:flex-row gap-3">
           <button
             style={{
@@ -242,7 +240,6 @@ export default function YieldTable() {
           >
             📊 Export
           </button>
-
           {selectedItems.length > 0 && (
             <button
               style={{
@@ -389,10 +386,9 @@ export default function YieldTable() {
                 const protocolIcon = getProtocolIcon(item.protocol);
                 const riskColor = getRiskColor(item.risk);
                 const isSelected = selectedItems.includes(index);
-
                 return (
                   <tr
-                    key={index}
+                    key={`${item.protocol}-${item.asset}-${index}`}
                     style={{
                       borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                       background: isSelected
@@ -526,27 +522,31 @@ export default function YieldTable() {
 
       {/* Mobile Cards */}
       <div className="mobile-cards">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {sortedData.map((item, index) => {
             const protocolIcon = getProtocolIcon(item.protocol);
             const riskColor = getRiskColor(item.risk);
             const isSelected = selectedItems.includes(index);
-
             return (
               <div
-                key={index}
+                key={`mobile-${item.protocol}-${item.asset}-${index}`}
                 style={{
                   background: isSelected
                     ? 'rgba(102, 126, 234, 0.1)'
                     : 'rgba(255, 255, 255, 0.08)',
                   backdropFilter: 'blur(15px)',
-                  borderRadius: '16px',
-                  padding: '1.25rem',
+                  borderRadius: '20px',
+                  padding: '1.5rem',
                   border: isSelected
                     ? '1px solid rgba(102, 126, 234, 0.3)'
                     : '1px solid rgba(255, 255, 255, 0.15)',
+                  boxShadow: isSelected 
+                    ? '0 8px 25px rgba(102, 126, 234, 0.2)' 
+                    : '0 4px 15px rgba(0, 0, 0, 0.1)',
                   transition: 'all 0.3s ease',
                   cursor: 'pointer',
+                  minHeight: '120px',
+                  transform: isSelected ? 'translateY(-2px)' : 'translateY(0)',
                 }}
                 onClick={() => toggleSelection(index)}
               >
@@ -556,7 +556,7 @@ export default function YieldTable() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
-                    marginBottom: '1rem',
+                    marginBottom: '1.25rem',
                   }}
                 >
                   <div
@@ -584,17 +584,17 @@ export default function YieldTable() {
                     />
                     <div
                       style={{
-                        width: '36px',
-                        height: '36px',
+                        width: '44px',
+                        height: '44px',
                         background: protocolIcon.bg,
-                        borderRadius: '10px',
+                        borderRadius: '12px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '0.875rem',
+                        fontSize: '1.125rem',
                         fontWeight: '700',
                         color: 'white',
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
                         flexShrink: 0,
                       }}
                     >
@@ -605,8 +605,8 @@ export default function YieldTable() {
                         style={{
                           fontWeight: '700',
                           color: '#1e293b',
-                          fontSize: '1rem',
-                          marginBottom: '0.125rem',
+                          fontSize: '1.125rem',
+                          marginBottom: '0.25rem',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           whiteSpace: 'nowrap',
@@ -616,7 +616,7 @@ export default function YieldTable() {
                       </div>
                       <div
                         style={{
-                          fontSize: '0.75rem',
+                          fontSize: '0.875rem',
                           color: '#64748b',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -627,15 +627,14 @@ export default function YieldTable() {
                       </div>
                     </div>
                   </div>
-
                   {/* Risk Badge */}
                   <span
                     style={{
                       background: riskColor.bg,
                       color: riskColor.color,
-                      padding: '0.375rem 0.75rem',
+                      padding: '0.5rem 1rem',
                       borderRadius: '20px',
-                      fontSize: '0.675rem',
+                      fontSize: '0.75rem',
                       fontWeight: '600',
                       border: `1px solid ${riskColor.color}20`,
                       flexShrink: 0,
@@ -645,7 +644,6 @@ export default function YieldTable() {
                     {item.risk}
                   </span>
                 </div>
-
                 {/* Metrics */}
                 <div
                   style={{
@@ -657,34 +655,34 @@ export default function YieldTable() {
                   <div>
                     <div
                       style={{
-                        fontSize: '1.5rem',
+                        fontSize: '1.75rem',
                         fontWeight: '700',
                         background:
                           'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
-                        marginBottom: '0.125rem',
+                        marginBottom: '0.25rem',
                       }}
                     >
                       {item.apy}
                     </div>
-                    <div style={{ fontSize: '0.675rem', color: '#64748b' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>
                       APY
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div
                       style={{
-                        fontSize: '1rem',
+                        fontSize: '1.125rem',
                         fontWeight: '600',
                         color: '#1e293b',
-                        marginBottom: '0.125rem',
+                        marginBottom: '0.25rem',
                       }}
                     >
                       {item.tvl}
                     </div>
-                    <div style={{ fontSize: '0.675rem', color: '#64748b' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>
                       TVL
                     </div>
                   </div>
@@ -700,80 +698,62 @@ export default function YieldTable() {
         .mobile-cards {
           display: block;
         }
-
         .desktop-table {
           display: none;
         }
-
         /* Desktop breakpoints */
         @media (min-width: 768px) {
           .mobile-cards {
             display: none;
           }
-
           .desktop-table {
             display: block;
           }
         }
-
         /* Responsive classes */
         .flex {
           display: flex;
         }
-
         .flex-col {
           flex-direction: column;
         }
-
         .flex-row {
           flex-direction: row;
         }
-
         .justify-between {
           justify-content: space-between;
         }
-
         .items-center {
           align-items: center;
         }
-
         .gap-3 {
           gap: 0.75rem;
         }
-
         .mb-4 {
           margin-bottom: 1rem;
         }
-
         .mb-6 {
           margin-bottom: 1.5rem;
         }
-
         @media (min-width: 640px) {
           .sm\\:flex-row {
             flex-direction: row;
           }
-
           .sm\\:justify-between {
             justify-content: space-between;
           }
-
           .sm\\:items-center {
             align-items: center;
           }
-
           .sm\\:mb-0 {
             margin-bottom: 0;
           }
-
           .sm\\:text-sm {
             font-size: 0.875rem;
           }
-
           .sm\\:text-xl {
             font-size: 1.25rem;
           }
-
           .sm\\:p-8 {
             padding: 2rem;
           }
