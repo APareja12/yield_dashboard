@@ -202,7 +202,6 @@ export default function RiskAssessment({ data }: RiskAssessmentProps) {
                 width: '100%',
                 padding: '1rem',
                 borderRadius: '12px',
-                border: 'none',
                 fontSize: '0.875rem',
                 fontWeight: '600',
                 cursor: 'pointer',
