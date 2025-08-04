@@ -136,8 +136,8 @@ export default function YieldTable() {
   };
 
   const sortedData = [...mockData].sort((a, b) => {
-    let aVal: any = a[sortField];
-    let bVal: any = b[sortField];
+    let aVal: string | number = a[sortField];
+    let bVal: string | number = b[sortField];
 
     if (sortField === 'apy') {
       aVal = parseFloat(a.apy.replace('%', ''));

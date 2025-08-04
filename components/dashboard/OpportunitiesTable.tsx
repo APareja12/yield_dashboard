@@ -318,7 +318,7 @@ export default function OpportunitiesTable({ data }: OpportunitiesTableProps) {
               ].map(({ key, label }) => (
                 <th
                   key={key}
-                  onClick={() => key !== 'action' && handleSort(key as any)}
+                  onClick={() => key !== 'action' && handleSort(key as 'protocol' | 'asset' | 'apy' | 'tvl')}
                   style={{
                     padding: '1rem 1.5rem',
                     textAlign: 'left',

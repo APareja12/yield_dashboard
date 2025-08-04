@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import { useState } from 'react';
@@ -23,7 +22,7 @@ const historicalData = [
   { date: 'Jul 2024', Compound: 4.0, Aave: 3.6, Yearn: 4.9 },
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ color: string; dataKey: string; value: number }>; label?: string }) => {
   if (active && payload && payload.length) {
     return (
       <div
@@ -46,7 +45,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         >
           {label}
         </p>
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry: { color: string; dataKey: string; value: number }, index: number) => (
           <p
             key={index}
             style={{

@@ -1,10 +1,8 @@
-import { createConfig, http } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { walletConnect } from 'wagmi/connectors';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 
 // Only initialize once
-let wagmiConfigInstance: any = null;
+let wagmiConfigInstance: ReturnType<typeof getDefaultConfig> | null = null;
 
 export const wagmiConfig =
   wagmiConfigInstance ||

@@ -182,7 +182,7 @@ export default function HeroSection() {
                 : 'none',
             }}
           >
-            {heroStats.map((stat, index) => (
+            {heroStats.map((stat) => (
               <div
                 key={stat.label} // Better key than index
                 style={{
@@ -352,7 +352,7 @@ export default function HeroSection() {
                 { icon: '🛡️', text: 'Risk Analysis' },
                 { icon: '📈', text: 'Yield Tracking' },
                 { icon: '🔄', text: 'Auto-compound' },
-              ].map((feature, index) => (
+              ].map((feature) => (
                 <div
                   key={feature.text}
                   style={{
@@ -364,7 +364,7 @@ export default function HeroSection() {
                     fontSize: '0.8rem',
                     fontWeight: '500',
                     animation: isLoaded
-                      ? `fadeIn 1s ease-out ${0.8 + index * 0.1}s both`
+                      ? 'fadeIn 1s ease-out 0.8s both'
                       : 'none',
                     padding: '0.75rem',
                     background: 'rgba(255, 255, 255, 0.05)',

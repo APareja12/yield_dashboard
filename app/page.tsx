@@ -2,7 +2,6 @@
 
 import './globals.css';
 import { useState } from 'react';
-import YieldTable from '@/components/dashboard/YieldTable';
 import RiskAssessment from '@/components/dashboard/RiskAssessment';
 import YieldCalculator from '@/components/dashboard/YieldCalculator';
 import Filters from '@/components/dashboard/Filters';

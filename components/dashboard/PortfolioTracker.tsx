@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount, useBalance } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +11,7 @@ export default function PortfolioTracker() {
     address: address,
   });
 
-  const [userPositions, setUserPositions] = useState([
+  const [userPositions] = useState([
     {
       protocol: 'Compound',
       asset: 'USDC',
